@@ -6,7 +6,7 @@ import java.io.Writer;
 
 public class Log {
 
-    private final Ln ln;
+    Ln ln;
 
     public Log(Ln ln) {
         this.ln = ln;

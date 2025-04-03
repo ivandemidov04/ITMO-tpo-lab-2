@@ -90,7 +90,6 @@ public class FunctionTest {
         } catch (IOException ex) {
             System.err.println("Ты как в тесте IOE поймал?!");
         }
-
     }
 
     @ParameterizedTest

@@ -6,12 +6,12 @@ import java.io.Writer;
 
 public class Function {
 
-    private final Cos cos;
-    private final Sin sin;
-    private final Cot cot;
-    private final Csc csc;
-    private final Log log;
-    private final Ln ln;
+    Cos cos;
+    Sin sin;
+    Cot cot;
+    Csc csc;
+    Log log;
+    Ln ln;
 
     public Function(Cos cos, Sin sin, Cot cot, Csc csc, Log log, Ln ln) {
         this.cos = cos;

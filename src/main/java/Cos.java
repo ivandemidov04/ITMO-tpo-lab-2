@@ -6,7 +6,7 @@ import java.io.Writer;
 
 public class Cos {
 
-    private final Sin sin;
+    Sin sin;
 
     public Cos(Sin sin) {
         this.sin = sin;

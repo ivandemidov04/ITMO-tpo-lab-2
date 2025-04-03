@@ -6,8 +6,8 @@ import java.io.Writer;
 
 public class Cot {
 
-    private final Sin sin;
-    private final Cos cos;
+    Sin sin;
+    Cos cos;
 
     public Cot(Sin sin, Cos cos) {
         this.sin = sin;
@@ -28,7 +28,7 @@ public class Cot {
         }
 
         if (Math.abs(sinValue) <= eps) {
-            return Double.NaN; // cot is undefined when sin(x) = 0
+            return Double.NaN;
         }
 
         return cosValue / sinValue;
