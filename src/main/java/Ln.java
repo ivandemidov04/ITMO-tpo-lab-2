@@ -6,6 +6,7 @@ import java.io.Writer;
 
 public class Ln {
     public double ln(double x, double eps) {
+        eps = eps/2;
         if (Double.isNaN(x) || x < (double) 0) {
             return Double.NaN;
         } else if (x == Double.POSITIVE_INFINITY) {

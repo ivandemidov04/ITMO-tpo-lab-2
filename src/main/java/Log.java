@@ -17,7 +17,9 @@ public class Log {
     }
 
     public double log(double a, double b, double esp) {
-        return ln.ln(b, esp) / ln.ln(a, esp);
+        var lnb = ln.ln(b, esp);
+        var lna = ln.ln(a, esp);
+        return lnb/lna;
     }
 
     public double writeResultToCSV(double a, double x, double eps, Writer out) {
