@@ -42,7 +42,7 @@ public class Function {
             }
 
             if (Math.abs(cosVal) <= eps) {
-                return Double.NaN; // Division by zero in cot(x)/cos(x)
+                return Double.NaN;
             }
 
             double term1 = cotVal / cosVal;
