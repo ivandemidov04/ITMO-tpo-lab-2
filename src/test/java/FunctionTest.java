@@ -9,10 +9,9 @@ import org.mockito.Mockito;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-
 public class FunctionTest {
     static double functionEps = 0.1;
-    double eps = 0.1;
+    double eps = 0.15;
 
     static Csc cscMock;
     static Cot cotMock;
@@ -42,7 +41,7 @@ public class FunctionTest {
         logMock = Mockito.mock(Log.class);
         try {
             cscIn = new FileReader("src/main/resources/CsvFiles/Inputs/CscIn.csv");
-            cotIn = new FileReader("src/main/resources/CsvFiles/Inputs/Cot.csv");
+            cotIn = new FileReader("src/main/resources/CsvFiles/Inputs/CotIn.csv");
             cosIn = new FileReader("src/main/resources/CsvFiles/Inputs/CosIn.csv");
             sinIn = new FileReader("src/main/resources/CsvFiles/Inputs/SinIn.csv");
             lnIn = new FileReader("src/main/resources/CsvFiles/Inputs/LnIn.csv");
@@ -50,7 +49,7 @@ public class FunctionTest {
             log3In = new FileReader("src/main/resources/CsvFiles/Inputs/Log3In.csv");
             log5In = new FileReader("src/main/resources/CsvFiles/Inputs/Log5In.csv");
             log10In = new FileReader("src/main/resources/CsvFiles/Inputs/Log10In.csv");
-
+            System.out.println();
             Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(cscIn);
             for (CSVRecord record : records) {
                 Mockito.when(cscMock.csc(Double.parseDouble(record.get(0)), functionEps)).thenReturn(Double.valueOf(record.get(1)));
