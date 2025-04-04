@@ -1,14 +1,15 @@
 import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mockito;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
+
 public class FunctionTest {
     static double functionEps = 0.1;
     double eps = 0.15;
@@ -30,6 +31,9 @@ public class FunctionTest {
     static Reader log5In;
     static Reader log10In;
 
+    static Writer out;
+    static CSVPrinter printer;
+
 
     @BeforeAll
     static void init() {
@@ -49,7 +53,8 @@ public class FunctionTest {
             log3In = new FileReader("src/main/resources/CsvFiles/Inputs/Log3In.csv");
             log5In = new FileReader("src/main/resources/CsvFiles/Inputs/Log5In.csv");
             log10In = new FileReader("src/main/resources/CsvFiles/Inputs/Log10In.csv");
-            System.out.println();
+            out = new FileWriter("src/main/resources/CsvFiles/Outputs/Out.csv");
+            printer = new CSVPrinter(out, CSVFormat.DEFAULT);
             Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(cscIn);
             for (CSVRecord record : records) {
                 Mockito.when(cscMock.csc(Double.parseDouble(record.get(0)), functionEps)).thenReturn(Double.valueOf(record.get(1)));
@@ -137,6 +142,15 @@ public class FunctionTest {
     @CsvFileSource(resources = "CsvFiles/Inputs/FunctionIn.csv")
     void testSystemWithLn(double value, double expected) {
         Function function = new Function(cosMock, sinMock, cotMock, cscMock, new Log(new Ln()), new Ln());
-        Assertions.assertEquals(expected, function.calculate(value, functionEps), eps);
+        Assertions.assertEquals(expected, function.writeResultToCSV(value, functionEps, printer), eps);
+    }
+
+    @AfterAll
+    static void closeWriters() {
+        try {
+            out.close();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

@@ -72,10 +72,11 @@ public class Function {
         }
     }
 
-    public double writeResultToCSV(double x, double eps, Writer out) {
+    public double writeResultToCSV(double x, double eps, CSVPrinter printer) {
         double res = calculate(x, eps);
-        try (CSVPrinter printer = CSVFormat.DEFAULT.print(out)) {
+        try {
             printer.printRecord(x, res);
+            printer.flush();
         } catch (IOException e) {
             System.out.println("Wrong filename");
         }
